@@ -1,0 +1,21 @@
+{
+    "Version": "2012-10-17",
+    "Id": "Allow only My VPC",
+    "Statement": [
+        {
+            "Sid": "Allow only My VPC",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:*",
+            "Resource": [
+                "${dbS3Arn}/*",
+                "${dbS3Arn}"
+            ],
+            "Condition": {
+                "StringLike": {
+                    "aws:sourceVpc": "${VPCID}"
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "logs.${Region}.amazonaws.com"
+            },
+            "Action": "s3:GetBucketAcl",
+            "Resource": "${LogS3Arn}"
+        },
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "logs.${Region}.amazonaws.com"
+            },
+            "Action": "s3:PutObject",
+            "Resource": "${LogS3Arn}/*"
+        }
+    ]
+}
