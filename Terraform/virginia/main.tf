@@ -1,7 +1,5 @@
 provider "aws" {
-  region  = "us-east-1"
-  access_key = ""
-  secret_key = ""
+  region  = var.region
 }
 
 terraform {
@@ -69,8 +67,6 @@ module "web-cluster" {
   instance_type = "t2.micro"
 
   bastion_key_name = "Virginia_key"
-  //db_master_name = "admin"
-  //db_master_pw = "1q2w3e4r!"
 
   vpc_id = module.vpc.vpc_id
   pub_subnet_a = module.vpc.pub_subnet_a

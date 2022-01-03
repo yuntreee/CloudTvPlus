@@ -1,7 +1,5 @@
 provider "aws" {
-  region  = "ap-northeast-2"
-  access_key = ""
-  secret_key = ""
+  region  = var.region
 }
 
 terraform {
@@ -49,15 +47,10 @@ module "rds" {
   region_name = var.region_name
   account_id = var.account_id
 
-  //db_master_name = "admin"
-  //db_master_pw = "1q2w3e4r!"
-
   vpc_id = module.vpc.vpc_id
   pri_subnet_a = module.vpc.pri_subnet_a
   pri_subnet_c = module.vpc.pri_subnet_c  
 
-  # instance_sg = module.web-cluster.instance_sg
-  # bastion_sg = module.web-cluster.bastion_sg  
   chain_SG = ["${module.web-cluster.instance_sg}", 
               "${module.web-cluster.bastion_sg}"]
   cidr = ["20.0.0.0/16"]
@@ -76,7 +69,7 @@ module "rds_Replica"{
 
   instance_sg = module.web-cluster.instance_sg
   bastion_sg = module.web-cluster.bastion_sg  
-  source_db_arn = module.rds.db_arn
+  source_db_arn = module.rds.db_id
 
 }
 
@@ -91,8 +84,6 @@ module "web-cluster" {
   instance_type = "t2.micro"
 
   bastion_key_name = "soldesk"
-  //db_master_name = "admin"
-  //db_master_pw = "1q2w3e4r!"
 
   vpc_id = module.vpc.vpc_id
   pub_subnet_a = module.vpc.pub_subnet_a

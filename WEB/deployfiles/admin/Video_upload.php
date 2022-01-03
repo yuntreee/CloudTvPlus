@@ -19,12 +19,10 @@ if (file_exists("keys.php"))
 else
 {
     function aws_key(){
-        return "";
-        //return $secrets[ 'upload_admin' ];
+        return $secrets['upload_key'];
     }
     function aws_secret(){
-        return "";
-        //return $secrets[ 'upload_password' ];
+        return $secrets['upload_password'];
     }
     function bucket() {
         return "ctp-input-videos-seo";
